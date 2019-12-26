@@ -36,3 +36,53 @@
     transform: rotate(360deg);
   }
 }
+
+/* header {
+  background-color: #282c34;
+}
+
+nav {
+  background-color: #61dafb;
+}
+
+.loggedin {
+  display: grid;
+  grid-template-columns: 1.8fr 0.2fr;
+}
+
+.profile-title {
+  margin: auto;
+}
+
+.topics {
+  margin: auto;
+  width: 40%;
+  border: 1px solid;
+  border-radius: 8px;
+}
+
+.topic-title {
+  /* display: block; 
+  margin-left: 20%;
+  cursor: pointer;
+} */
+
+.clickable {
+  cursor: pointer;
+}
+
+.container {
+  margin-top: 5%;
+}
+
+.new-topic, .new-message {
+  margin-bottom: 5%;
+}
+
+.topic-title {
+  padding: 5px;
+}
+
+.topic-title:hover {
+  background-color: rgb(235, 235, 235);
+}
