@@ -61,7 +61,7 @@ const Topic = ({ match, user: { username }, history }) => {
           <div className="form-group">
             <textarea className='form-control' cols="30" rows="10" value={message} placeholder="Message" onChange={e => setMessage(e.target.value)}></textarea>
           </div>
-          <input className='btn btn-warning' type="submit" value='submit' onClick={e => {
+          <input className='btn btn-warning' type="submit" value='Submit' onClick={e => {
             e.preventDefault();
             handleSubmit();
           }} />
