@@ -39,7 +39,7 @@ const Content = ({ setUser, loggedIn, user }) => {
           <Route path="/topic/:topic_id" component={(props) => <SignIn setUser={setUser} {...props} />} />
           <Route path="/profile/:user_id" component={(props) => <Profile {...props} />} />
           <Route path="/signin" component={(props) => <SignIn setUser={setUser} {...props} />} />
-          <Route path="/signup" component={SignUp} />
+          <Route path="/signup" component={(props) => <SignUp setUser={setUser} {...props} />} />
         </Switch>
       </main>
     )

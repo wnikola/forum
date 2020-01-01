@@ -21,7 +21,7 @@ const SignIn = ({ match, setUser, history }) => {
         // data.success ? console.log(data, 'Ulogovan') : console.log(data, 'Nije ulogovan');
       });
   }
-  console.log(match.params.topic_id)
+  // console.log(match.params.topic_id)
   return (
     <div className="container">
       <form>

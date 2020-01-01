@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { signUp } from '../utilities/forum-service';
 
-const SignUp = (props) => {
+const SignUp = ({ setUser, history }) => {
   const [fName, setFName] = useState('');
   const [lName, setLName] = useState('');
   const [username, setUsername] = useState('');
@@ -35,8 +35,8 @@ const SignUp = (props) => {
       .then(data => {
         if (data.success) {
           // console.log(data.user)
-          // props.setUser(data.user);
-          props.history.push('/signin');
+          setUser(data.user);
+          history.push('/topics');
         }
       });
   }
