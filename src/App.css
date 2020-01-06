@@ -86,3 +86,15 @@ nav {
 .topic-title:hover {
   background-color: rgb(235, 235, 235);
 }
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.warn {
+  color: red;
+}

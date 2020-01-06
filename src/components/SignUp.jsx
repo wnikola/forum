@@ -10,6 +10,10 @@ const SignUp = ({ setUser, history }) => {
   const [pwConfirm, setPwConfirm] = useState('')
   const [validPw, setValidPw] = useState(false)
   const [isSame, setIsSame] = useState(false)
+  const [isSameWarn, setIsSameWarn] = useState('hidden');
+  const [pwHelp, setPwHelp] = useState('text-muted');
+  const [isFilled, setIsFilled] = useState('hidden');
+  const [usernameTaken, setUsernameTaken] = useState('hidden');
 
   useEffect(() => {
     function isValidPw() {
@@ -28,15 +32,27 @@ const SignUp = ({ setUser, history }) => {
   }, [pwConfirm, password])
 
   const handleSubmit = () => {
-    if (!validPw || !isSame) {
+    if (!fName || !lName || !username || !email) {
+      setIsFilled('warn');
+      return;
+    } else if (!validPw) {
+      setPwHelp('warn');
+      return;
+    } else if (!isSame) {
+      setIsSameWarn('visible');
       return;
     }
+
     signUp({ name: fName, surname: lName, username, email, password })
       .then(data => {
         if (data.success) {
           // console.log(data.user)
+          // console.log(data)
           setUser(data.user);
           history.push('/topics');
+        } else if (data.message === 'User already exists!') {
+          // console.log(data);
+          setUsernameTaken('warn');
         }
       });
   }
@@ -45,22 +61,28 @@ const SignUp = ({ setUser, history }) => {
     <div className="container">
       <form>
         <div className="form-group">
-          <input className='form-control' type="text" placeholder="First Name" onChange={e => setFName(e.target.value)} />
+          <input className='form-control' type="text" placeholder="First Name" onChange={e => { setFName(e.target.value); setIsFilled('hidden'); }} />
         </div>
         <div className="form-group">
-          <input className='form-control' type="text" placeholder="Last Name" onChange={e => { setLName(e.target.value) }} />
-          <div className="form-group">
-          </div>
-          <input className='form-control' type="text" placeholder="Username" onChange={e => { setUsername(e.target.value) }} />
-          <div className="form-group">
-          </div>
-          <input className='form-control' type="text" placeholder="Email" onChange={e => { setEmail(e.target.value) }} />
+          <input className='form-control' type="text" placeholder="Last Name" onChange={e => { setLName(e.target.value); setIsFilled('hidden'); }} />
         </div>
         <div className="form-group">
-          <input className='form-control' type="password" placeholder="Password" onChange={e => { setPassword(e.target.value) }} />
+          <input className='form-control' type="text" placeholder="Username" onChange={e => { setUsername(e.target.value); setIsFilled('hidden'); setUsernameTaken('hidden'); }} />
+          <small className={`form-text ${usernameTaken}`}>Username already taken</small>
         </div>
         <div className="form-group">
-          <input className='form-control' type="password" placeholder="Confirm Password" onChange={e => setPwConfirm(e.target.value)} />
+          <input className='form-control' type="email" placeholder="Email" onChange={e => { setEmail(e.target.value); setIsFilled('hidden'); }} />
+        </div>
+        <div className="form-group">
+          <input className='form-control' aria-describedby="passwordHelpBlock" type="password" placeholder="Password" onChange={e => { setPassword(e.target.value); setPwHelp('text-muted'); }} />
+          <small id="passwordHelpBlock" className={`form-text ${pwHelp}`}>Password must be at least 8 characters long, and contain letters and numbers</small>
+        </div>
+        <div className="form-group">
+          <input className='form-control' type="password" placeholder="Confirm Password" onChange={e => { setPwConfirm(e.target.value); setIsSameWarn('hidden'); }} />
+          <small id="pass-confirm" className={`form-text ${isSameWarn} warn`}>Passwords don't match</small>
+        </div>
+        <div className="form-group">
+          <small className={`form-text ${isFilled}`}>Please fill out all the fields</small>
         </div>
         <input className='btn btn-warning' type="submit" value="Sign Up" onClick={e => {
           e.preventDefault();
