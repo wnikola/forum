@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { newTopic, newMessage } from '../utilities/forum-service';
 
-const NewTopic = ({ user: { username, user_id } }) => {
+const NewTopic = ({ user: { username, user_id }, refreshTopics }) => {
   const [topic, setTopic] = useState('');
   const [message, setMessage] = useState('');
 
@@ -13,6 +13,7 @@ const NewTopic = ({ user: { username, user_id } }) => {
           // .then(data => console.log(data));
           setTopic('');
           setMessage('');
+          refreshTopics();
         } else {
           console.log(data);
         }

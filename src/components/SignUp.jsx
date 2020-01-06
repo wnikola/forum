@@ -8,8 +8,8 @@ const SignUp = ({ setUser, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [pwConfirm, setPwConfirm] = useState('')
-  const [validPw, setValidPw] = useState(false)
-  const [isSame, setIsSame] = useState(false)
+  const [validPw, setValidPw] = useState(false);
+  const [isSame, setIsSame] = useState(false);
   const [isSameWarn, setIsSameWarn] = useState('hidden');
   const [pwHelp, setPwHelp] = useState('text-muted');
   const [isFilled, setIsFilled] = useState('hidden');
