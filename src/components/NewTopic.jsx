@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { newTopic, newMessage } from '../utilities/forum-service';
+import { UserContext } from '../services/UserContext';
 
-const NewTopic = ({ user: { username, user_id }, refreshTopics }) => {
+const NewTopic = ({ refreshTopics }) => {
+  const [user] = useContext(UserContext);
   const [topic, setTopic] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = () => {
-    newTopic({ user_id, title: topic })
+    newTopic({ user_id: user.user_id, title: topic })
       .then(data => {
         if (data.success) {
-          newMessage({ username, topic_id: data.topic.topic_id, message });
+          newMessage({ username: user.username, topic_id: data.topic.topic_id, message });
           // .then(data => console.log(data));
           setTopic('');
           setMessage('');

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { signIn } from '../utilities/forum-service';
+import { UserContext } from '../services/UserContext';
 
-const SignIn = ({ match, setUser, history }) => {
+const SignIn = ({ match, history }) => {
+  const [, setUser] = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [notFound, setNotFound] = useState('hidden');

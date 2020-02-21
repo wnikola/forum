@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Content from './layout/Content';
 import Header from './layout/Header';
+import { UserProvider } from './services/UserContext';
 
 function App() {
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
 
   return (
     <>
       <Router>
-        <Header user={user} loggedIn={user} setUser={setUser} />
-        <Content setUser={setUser} loggedIn={user} user={user} />
+        <UserProvider>
+          {/* <Header user={user} loggedIn={user} setUser={setUser} /> */}
+          <Header />
+          {/* <Content setUser={setUser} loggedIn={user} user={user} /> */}
+          <Content />
+        </UserProvider>
       </Router>
     </>
   );

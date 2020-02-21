@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { signUp } from '../utilities/forum-service';
+import { UserContext } from '../services/UserContext';
 
-const SignUp = ({ setUser, history }) => {
+const SignUp = ({ history }) => {
+  const [, setUser] = useContext(UserContext);
   const [fName, setFName] = useState('');
   const [lName, setLName] = useState('');
   const [username, setUsername] = useState('');

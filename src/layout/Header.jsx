@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../services/UserContext';
 
-const Header = ({ loggedIn, setUser }) => {
+const Header = () => {
+  const [user, setUser] = useContext(UserContext);
 
-  if (loggedIn) {
+  if (user) {
     return (
       <header>
         <nav className='loggedin navbar sticky-top navbar-expand-lg navbar-dark bg-dark'>
@@ -14,9 +17,9 @@ const Header = ({ loggedIn, setUser }) => {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-md-auto">
               <li className="nav-item dropdown">
-                <span className="clickable nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{loggedIn.username}</span>
+                <span className="clickable nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{user.username}</span>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <Link className='profile-title dropdown-item' to={`/profile/${loggedIn.user_id}`}>Profile</Link>
+                  <Link className='profile-title dropdown-item' to={`/profile/${user.user_id}`}>Profile</Link>
                   <div className="dropdown-divider"></div>
                   <span className="clickable dropdown-item" onClick={() => setUser()} >Log Out</span>
                 </div>

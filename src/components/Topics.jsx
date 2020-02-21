@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getTopics } from '../utilities/forum-service';
 import { withRouter } from 'react-router-dom';
 import NewTopic from './NewTopic';
+import { UserContext } from '../services/UserContext';
 
-const Topics = ({ history, loggedIn, user }) => {
-
+const Topics = ({ history }) => {
+  const [user] = useContext(UserContext);
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const Topics = ({ history, loggedIn, user }) => {
         })}
       </div>
       {
-        loggedIn ? <NewTopic user={user} refreshTopics={refreshTopics} /> : <></>
+        user ? <NewTopic refreshTopics={refreshTopics} /> : <></>
       }
     </>
   )

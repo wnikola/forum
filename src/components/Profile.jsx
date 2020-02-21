@@ -20,7 +20,6 @@ const Profile = ({ match, history }) => {
       .then(data => {
         if (data.success) {
           setUserTopics(data.topics.filter(topic => topic.user_id === userID));
-          // console.log(userTopics);
         } else {
           console.log(data);
         }

@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getTopicMessages, newMessage, getTopics } from '../utilities/forum-service';
 import { withRouter } from 'react-router-dom';
+import { UserContext } from '../services/UserContext';
 
-const Topic = ({ match, user: { username }, history }) => {
+const Topic = ({ match, history }) => {
+  const [user] = useContext(UserContext);
   const [topicID] = useState(match.params.topic_id);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [topic, setTopic] = useState({});
 
   function handleSubmit() {
-    newMessage({ username, topic_id: topicID, message })
+    newMessage({ username: user.username, topic_id: topicID, message })
       .then(data => {
-        // console.log(data);
         getTopicMessages(topicID)
           .then(data => setMessages(data.messages));
         setMessage('');
